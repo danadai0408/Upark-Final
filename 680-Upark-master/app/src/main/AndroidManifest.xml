@@ -3,6 +3,7 @@
     package="com.example.dannadai.uparking">
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -22,5 +23,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserArea"></activity>
     </application>
+    <activity   android:name=".spaceInfo"></activity>
+    <activity   android:name=".WebLookup"></activity>
+    <activity   android:name=".profile"></activity>
+    <activity   android:name=".menu"></activity>
 
 </manifest>
