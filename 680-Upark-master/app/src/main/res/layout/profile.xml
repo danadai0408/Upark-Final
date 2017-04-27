@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textSize="28sp"
+        android:textColor="#13213a"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1.79"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:textSize="15sp"
+            android:textColor="#13213a"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/firstNameInput"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="#13213a"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1.79"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:textSize="15sp"
+            android:textColor="#13213a"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/lastNameInput"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="#13213a"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1.79"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="15sp"
+            android:textColor="#13213a"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="#13213a"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1.79"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="15sp"
+            android:textColor="#13213a"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="#13213a"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+</LinearLayout>
