@@ -19,8 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity" ></activity>
         <activity android:name=".UserArea"></activity>
+        <activity   android:name=".spaceInfo"></activity>
+        <activity   android:name=".WebLookup"></activity>
+        <activity   android:name=".profile"></activity>
+        <activity   android:name=".menu"></activity>
+        
+
     </application>
 
 </manifest>
