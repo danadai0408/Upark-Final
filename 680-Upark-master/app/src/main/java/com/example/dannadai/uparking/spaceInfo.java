@@ -30,7 +30,7 @@ public class spaceInfo extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.parkinfo);
+        setContentView(R.layout.spaceinfo);
 
 
         // Set up click listeners for all the buttons
