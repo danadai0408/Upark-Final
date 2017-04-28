@@ -12,9 +12,54 @@
         <FrameLayout android:id="@android:id/tabcontent"
             android:layout_width="match_parent" android:layout_height="match_parent">
 
-            <!-- first tab -->
+            <!--  first tab -->
             <LinearLayout
                 android:id="@+id/tab1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout android:orientation="horizontal"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/searchET"
+                        android:layout_width="219dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="0.39" />
+
+                    <Button
+                        android:id="@+id/searchButton"
+                        android:text="Search"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@android:color/transparent"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="470dp"
+                    tools:context="com.example.dannadai.uparking.myapplication.MapsActivity"/>
+            </LinearLayout>
+
+            <!--  second tab -->
+            <LinearLayout android:id="@+id/tab2"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent" android:background="#fffff670">
+
+                <TextView android:id="@+id/TextView01"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:textColor="#ff0000ff"
+                    android:gravity="center" android:textSize="14pt" />
+            </LinearLayout>
+
+            <!-- third tab -->
+            <LinearLayout
+                android:id="@+id/tab3"
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
@@ -111,50 +156,9 @@
 
             </LinearLayout>
 
-            <!--  second tab -->
-            <LinearLayout
-                android:id="@+id/tab2"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-                <LinearLayout android:orientation="horizontal"
-                    android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/searchET"
-                        android:layout_width="219dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="0.39" />
 
-                    <Button
-                        android:id="@+id/searchButton"
-                        android:text="Search"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:background="@android:color/transparent"
-                        android:textSize="14sp" />
-                </LinearLayout>
 
-                <fragment
-                    android:id="@+id/map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="470dp"
-                    tools:context="com.example.dannadai.uparking"/>
-            </LinearLayout>
-
-            <!--  third tab -->
-            <LinearLayout android:id="@+id/tab3"
-                android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="#fffff670">
-
-                <TextView android:id="@+id/TextView01"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:textColor="#ff0000ff"
-                    android:gravity="center" android:textSize="14pt" />
-            </LinearLayout>
 
 
         </FrameLayout>
