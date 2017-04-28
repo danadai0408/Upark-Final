@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My posted Parking Places"
+        android:text="Share your parking places!"
         android:textSize="28sp"
         android:textColor="#13213a"
         android:layout_marginBottom="20dp"
@@ -50,7 +50,7 @@
         <TextView
             android:layout_weight="1.79"
             android:layout_height="wrap_content"
-            android:text="Posted Date"
+            android:text="Contact Name"
             android:textSize="15sp"
             android:textColor="#13213a"
             android:fontFamily="sans-serif"
@@ -77,7 +77,7 @@
         <TextView
             android:layout_weight="1.79"
             android:layout_height="wrap_content"
-            android:text="My Money"
+            android:text="Phone"
             android:textSize="15sp"
             android:textColor="#13213a"
             android:fontFamily="sans-serif"
