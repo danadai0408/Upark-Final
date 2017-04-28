@@ -12,6 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD4Tn6_MNbWqNJ32OgMiTDSVCltzhVcxJw" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps">
+        </activity>
+
         <activity android:name=".Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".RegisterActivity" ></activity>
         <activity android:name=".UserArea"></activity>
         <activity   android:name=".spaceInfo"></activity>
@@ -26,7 +37,6 @@
         <activity   android:name=".profile"></activity>
         <activity   android:name=".menu"></activity>
         
-
     </application>
 
 </manifest>
