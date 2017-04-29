@@ -30,11 +30,12 @@
 
                     <Button
                         android:id="@+id/searchButton"
-                        android:text="Search"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:background="@android:color/transparent"
+                        android:onClick="onSearch"
+                        android:text="Search"
                         android:textSize="14sp" />
                 </LinearLayout>
 
