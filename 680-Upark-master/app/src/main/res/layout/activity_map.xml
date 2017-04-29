@@ -12,9 +12,9 @@
         <FrameLayout android:id="@android:id/tabcontent"
             android:layout_width="match_parent" android:layout_height="match_parent">
 
-            <!--  first tab -->
+            <!--  first tab Search-->
             <LinearLayout
-                android:id="@+id/tab1"
+                android:id="@+id/SearchHere"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -40,27 +40,90 @@
                 </LinearLayout>
 
                 <fragment
-                    android:id="@+id/map"
+                    android:id="@+id/map1"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="470dp"
                     tools:context="com.example.dannadai.uparking.myapplication.MapsActivity"/>
             </LinearLayout>
 
-            <!--  second tab -->
-            <LinearLayout android:id="@+id/tab2"
+            <!--  second tab SpaceInfo-->
+            <LinearLayout android:id="@+id/SpaceInfo"
                 android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="#fffff670">
+                android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="18sp"
+                android:textColor="#13213a"
+                android:fontFamily="sans-serif"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="normal|bold" />
 
-                <TextView android:id="@+id/TextView01"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:textColor="#ff0000ff"
-                    android:gravity="center" android:textSize="14pt" />
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPostalAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact"
+                android:textSize="18sp"
+                android:textColor="#13213a"
+                android:fontFamily="sans-serif"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textSize="18sp"
+                android:textColor="#13213a"
+                android:fontFamily="sans-serif"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="normal|bold" />
+
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/showonmap"
+                style="@style/demoStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" show On map" />
+            <Button
+                android:id="@+id/dial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/demoStyle"
+                android:text="Dial" />
             </LinearLayout>
 
-            <!-- third tab -->
+            <!-- third tab Share your space-->
             <LinearLayout
-                android:id="@+id/tab3"
+                android:id="@+id/sharespace"
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
@@ -118,7 +181,7 @@
                         android:layout_marginTop="20dp" />
 
                     <EditText
-                        android:id="@+id/postedDateDisplay"
+                        android:id="@+id/contactName"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +208,7 @@
                         android:layout_marginTop="20dp" />
 
                     <EditText
-                        android:id="@+id/moneyDisplay"
+                        android:id="@+id/phoneDisplay"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -155,13 +218,13 @@
                         android:fontFamily="sans-serif" />
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
+
             </LinearLayout>
-
-
-
-
-
-
         </FrameLayout>
     </LinearLayout>
 </TabHost>

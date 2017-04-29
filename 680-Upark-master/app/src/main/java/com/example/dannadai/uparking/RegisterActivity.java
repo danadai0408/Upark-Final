@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 /**
  * Created by kikii on 4/23/2017.
  */

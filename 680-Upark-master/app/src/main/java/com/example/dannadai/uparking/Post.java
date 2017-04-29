@@ -26,40 +26,38 @@ public class Post extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+        setContentView(R.layout.posted_parking_places);
 
         //To hide AppBar for fullscreen.
         ActionBar ab = getSupportActionBar();
         ab.hide();
 
-        openHelper = new SQLiteDBHelper(this);
+        openHelper = new SQLiteDBHelper2(this);
 
         //Referencing EditText widgets and Button placed inside in xml layout file
-        final EditText _txtfullname = (EditText) findViewById(R.id.txtname_reg);
-        final EditText _txtemail = (EditText) findViewById(R.id.txtemail_reg);
-        final EditText _txtpass = (EditText) findViewById(R.id.txtpass_reg);
-        final EditText _txtmobile = (EditText) findViewById(R.id.txtmobile_reg);
-        Button   _btnreg = (Button) findViewById(R.id.btn_reg);
+        final EditText locationDisplay = (EditText) findViewById(R.id.locationDisplay);
+        final EditText contactName = (EditText) findViewById(R.id.contactName);
+        final EditText phoneDisplay = (EditText) findViewById(R.id.phoneDisplay);
+        Button save = (Button) findViewById(R.id.button);
 
         //Register Button Click Event
-        _btnreg.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 db = openHelper.getWritableDatabase();
 
-                String fullname = _txtfullname.getText().toString();
-                String email = _txtemail.getText().toString();
-                String pass = _txtpass.getText().toString();
-                String mobile = _txtmobile.getText().toString();
+                String location = locationDisplay.getText().toString();
+                String contact = contactName.getText().toString();
+                String phone = phoneDisplay.getText().toString();
 
                 //Calling InsertData Method - Defined below
-                InsertData(fullname, email, pass, mobile);
+                InsertData(location, contact, phone);
 
                 //Alert dialog after clicking the Register Account
-                final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Post.this);
                 builder.setTitle("Information");
-                builder.setMessage("Your Account is Successfully Created.");
+                builder.setMessage("Your post has been saved.");
                 builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -79,15 +77,13 @@ public class Post extends AppCompatActivity {
     }
 
     //Inserting Data into database - Like INSERT INTO QUERY.
-    public void InsertData(String fullName, String email, String password, String mobile ) {
+    public void InsertData(String location, String contact, String phone) {
 
         ContentValues values = new ContentValues();
-        values.put(SQLiteDBHelper.COLUMN_FULLNAME,fullName);
-        values.put(SQLiteDBHelper.COLUMN_EMAIL,email);
-        values.put(SQLiteDBHelper.COLUMN_PASSWORD,password);
-        values.put(SQLiteDBHelper.COLUMN_MOBILE,mobile);
-        long id = db.insert(SQLiteDBHelper.TABLE_NAME,null,values);
-        Log.d("SQLite", fullName + " added");
+        values.put(SQLiteDBHelper2.COLUMN_ADD,location);
+        values.put(SQLiteDBHelper2.COLUMN_CONTACTNAME,contact);
+        values.put(SQLiteDBHelper2.COLUMN_CONTACTPHONE,phone);
+        Log.d("Spot", location + " added");
     }
 
 }

@@ -45,13 +45,11 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class Login extends AppCompatActivity {
-    Animation zoomin, zoomout, shake;
     SQLiteOpenHelper dbhelper;
     SQLiteDatabase db;
     Cursor cursor;
     private View mContentView;
     private View mLoadingView;
-    private int mShortAnimationDuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
