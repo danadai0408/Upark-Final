@@ -6,10 +6,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-<<<<<<< Updated upstream
+
 import android.location.Address;
 import android.location.Geocoder;
-=======
+
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -20,7 +20,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
->>>>>>> Stashed changes
+
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -30,22 +30,20 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< Updated upstream
+
 import android.view.View;
-<<<<<<< Updated upstream
+
 import android.widget.EditText;
-=======
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
->>>>>>> Stashed changes
-=======
+
 import android.widget.TabHost;
 import android.widget.Toast;
->>>>>>> Stashed changes
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -61,29 +59,27 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-<<<<<<< Updated upstream
+
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-=======
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
->>>>>>> Stashed changes
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+
     private GoogleMap mMap;
-<<<<<<< Updated upstream
+    SQLiteOpenHelper openHelper;
+    SQLiteDatabase db;
     SQLiteOpenHelper dbhelper2;
     Cursor cursor;
-    private static final LatLng BENTLEY = new LatLng(42.3889167, -71.2208033);
-    private static final LatLng p = new LatLng(42.384802, -71.218219);
-    private static final LatLng p1 = new LatLng(42.386621, -71.225729);
-    private static final LatLng p2 = new LatLng(42.366146, -71.228616);
+
     public String address;
     Button search = (Button) findViewById(R.id.searchButton);
     EditText searchET = (EditText) findViewById(R.id.searchET);
-=======
+
     private static final LatLng p = new LatLng(42.3889167, -71.2208033);
     private static final LatLng p1 = new LatLng(42.384802, -71.218219);
     private static final LatLng p2 = new LatLng(42.386396, -71.225954);
@@ -94,11 +90,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String addr2 = "16 Forest Street";
     private static final String addr3 = "196 High St, Waltham";
 
->>>>>>> Stashed changes
+
     private static final float zoom = 14.0f;
     public static Context context;
-    SQLiteOpenHelper openHelper;
-    SQLiteDatabase db;
+    private TabHost tabs;
+    private GoogleApiClient client;
     private List<Marker> m;
     float d = 10000;
     String minAddress;
@@ -107,32 +103,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String strl1;//dest
     String strl2;//dest
 
-<<<<<<< Updated upstream
+    //---------------------------------------
+
+    //restore markers
     public MapsActivity() {
         if (m == null) {
             m = new ArrayList<Marker>();
         }
-=======
-    private TabHost tabs;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
->>>>>>> Stashed changes
     }
+
     //get location from address
     public LatLng getLocationFromAddress(Context context, String strAddress) {
 
@@ -143,15 +122,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             // May throw an IOException
             address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
+            if (address != null && address.size() > 0) {
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
             }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
+        } catch (Exception ex) {
+        }
+        ;
+        return null;
+    }
 
-<<<<<<< Updated upstream
-    //set onclick to search button
+
+  /*   //set onclick to search button
     public void onSearch(View view) {
 
         EditText location_tf = (EditText) findViewById(R.id.searchET);
@@ -172,7 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
         }
-=======
+
             p1 = new LatLng(location.getLatitude(), location.getLongitude() );
 
         } catch (IOException ex) {
@@ -181,31 +164,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         return p1;
->>>>>>> Stashed changes
-    }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    }*/
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-<<<<<<< Updated upstream
-        mMap.addMarker(new MarkerOptions().position(BENTLEY).title("Bentley University").snippet("175 Forest Street"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BENTLEY, zoom));
-
-        mMap.addMarker(new MarkerOptions().position(p).title(" ").snippet(" "));
-
-        mMap.addMarker(new MarkerOptions().position(p1));
-
-        mMap.addMarker(new MarkerOptions().position(p2));
-    }
-=======
         mMap.addMarker(new MarkerOptions().position(p).title("Bentley University").snippet(addr));
 
         mMap.addMarker(new MarkerOptions().position(p1).snippet(addr1));
@@ -220,20 +185,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 new GoogleMap.OnMarkerClickListener() {
 
                     public boolean onMarkerClick(Marker m) {
-                        String address = m.getSnippet();
+                        String title = m.getSnippet();
                         String snip = m.getSnippet();
-                        Toast.makeText(getApplicationContext(), m.getTitle() + "\n" + address, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), title + "\n" + snip, Toast.LENGTH_LONG).show();
 
-                        if ( address.equals(addr) ) {
+                        if (snip.equals(addr)) {
                             tabs.setCurrentTabByTag("tag2");
                         }
-                        if (address.equals(addr1) ) {
+                        if (snip.equals(addr1)) {
                             tabs.setCurrentTabByTag("tag2");
                         }
-                        if ( address.equals(addr2) ) {
+                        if (snip.equals(addr2)) {
                             tabs.setCurrentTabByTag("tag2");
                         }
-                        if ( address.equals(addr3) ) {
+                        if (snip.equals(addr3)) {
                             tabs.setCurrentTabByTag("tag2");
                         }
                         return true;
@@ -250,56 +215,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         );
     }
 
-    public void openSpaceInfo(){
-
-    }
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
-    //Add option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Uri uri;
-        // Handle item selection
-        switch (item.getItemId()) {
-
-            case R.id.profile:
-                Intent i1 = new Intent(this, profile.class);
-                startActivity(i1);
-                return true;
-
-            case R.id.feedback:
-                Uri uri2 = Uri.parse("mailto:customerservice@gmail.com");
-                Intent i2 = new Intent(Intent.ACTION_SENDTO, uri2);
-                startActivity(i2);
-
-                return true;
-
-            case R.id.close:
-
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
-
-
-<<<<<<< Updated upstream
     ///get address from LatLng
     private String GetAddress(Double lat, Double lon) {
         Geocoder geocoder = new Geocoder(context, Locale.ENGLISH);
@@ -329,32 +250,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         return ret;
     }
+
     //finding distance between two geo points.
-    public static float distFrom (float lat1, float lng1, float lat2, float lng2 )
-    {
+    public float distFrom(float lat1, float lng1, float lat2, float lng2) {
         double earthRadius = 3958.75;
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double dist = earthRadius * c;
 
         int meterConversion = 1609;
 
         return new Float(dist * meterConversion).floatValue();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map1);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         TabHost tabs = (TabHost) findViewById(R.id.tabhost);
         tabs.setup();
         TabHost.TabSpec spec;
+
 //Insert some base data
         db = dbhelper2.getWritableDatabase();
 
@@ -372,6 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         //TODO: show the spot with marker on map
+
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mMap.setMyLocationEnabled(true);
@@ -583,7 +508,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ll = getLocationFromAddress(context, location);
         mMap.addMarker(new MarkerOptions().position(ll).title("Pick Me!").snippet(location));
         Log.d("Spot", location + " added");
-=======
+    }
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -618,6 +544,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
->>>>>>> Stashed changes
+
+    }
+
+
+    //－－－－－－－－－Add option menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Uri uri;
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.profile:
+                Intent i1 = new Intent(this, profile.class);
+                startActivity(i1);
+                return true;
+
+            case R.id.feedback:
+                Uri uri2 = Uri.parse("mailto:customerservice@gmail.com");
+                Intent i2 = new Intent(Intent.ACTION_SENDTO, uri2);
+                startActivity(i2);
+
+                return true;
+
+            case R.id.close:
+
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }
