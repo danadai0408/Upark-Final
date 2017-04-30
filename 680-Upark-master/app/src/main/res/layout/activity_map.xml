@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tabhost" android:layout_width="match_parent"
+    android:id="@+id/tabhost"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout android:orientation="vertical"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TabWidget android:id="@android:id/tabs"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             />
 
         <FrameLayout android:id="@android:id/tabcontent"
-            android:layout_width="match_parent" android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <!--  first tab Search-->
             <LinearLayout
                 android:id="@+id/SearchHere"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:text="Map">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.example.dannadai.uparking.myapplication.MapsActivity"/>
+
+
 
                 <LinearLayout android:orientation="horizontal"
-                    android:layout_width="match_parent" android:layout_height="wrap_content">
+                android:layout_width="match_parent" android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/searchET"
                         android:layout_width="219dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_weight="0.39" />
+                        android:layout_weight="0.39"
+                        android:layout_marginTop="5dp" />
 
                     <Button
                         android:id="@+id/searchButton"
@@ -37,6 +52,7 @@
                         android:onClick="onSearch"
                         android:text="Search"
                         android:textSize="14sp" />
+<<<<<<< Updated upstream
                 </LinearLayout>
 
                 <fragment
@@ -45,11 +61,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="470dp"
                     tools:context="com.example.dannadai.uparking.myapplication.MapsActivity"/>
+=======
+            </LinearLayout>
+>>>>>>> Stashed changes
             </LinearLayout>
 
             <!--  second tab SpaceInfo-->
             <LinearLayout android:id="@+id/SpaceInfo"
                 android:orientation="vertical" android:layout_width="match_parent"
+<<<<<<< Updated upstream
                 android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
@@ -106,6 +126,10 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="phone" />
+=======
+                android:layout_height="match_parent" android:background="#fffff670"
+                android:text="List">
+>>>>>>> Stashed changes
 
             <Button
                 android:id="@+id/showonmap"
@@ -125,7 +149,8 @@
             <LinearLayout
                 android:id="@+id/sharespace"
                 android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:text="Share">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,7 +170,7 @@
                     <TextView
                         android:layout_weight="1.79"
                         android:layout_height="wrap_content"
-                        android:text="Location"
+                        android:text="Address"
                         android:textSize="15sp"
                         android:textColor="#13213a"
                         android:fontFamily="sans-serif"
@@ -218,6 +243,7 @@
                         android:fontFamily="sans-serif" />
                 </LinearLayout>
 
+<<<<<<< Updated upstream
                 <Button
                     android:id="@+id/button"
                     android:layout_width="match_parent"
@@ -225,6 +251,10 @@
                     android:text="Save" />
 
             </LinearLayout>
+=======
+            </LinearLayout>
+
+>>>>>>> Stashed changes
         </FrameLayout>
     </LinearLayout>
 </TabHost>

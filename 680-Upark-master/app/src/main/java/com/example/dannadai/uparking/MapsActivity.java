@@ -30,6 +30,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+<<<<<<< Updated upstream
 import android.view.View;
 <<<<<<< Updated upstream
 import android.widget.EditText;
@@ -41,7 +42,15 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 >>>>>>> Stashed changes
+=======
+import android.widget.TabHost;
+import android.widget.Toast;
+>>>>>>> Stashed changes
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -64,6 +73,7 @@ import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
+<<<<<<< Updated upstream
     SQLiteOpenHelper dbhelper2;
     Cursor cursor;
     private static final LatLng BENTLEY = new LatLng(42.3889167, -71.2208033);
@@ -73,6 +83,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public String address;
     Button search = (Button) findViewById(R.id.searchButton);
     EditText searchET = (EditText) findViewById(R.id.searchET);
+=======
+    private static final LatLng p = new LatLng(42.3889167, -71.2208033);
+    private static final LatLng p1 = new LatLng(42.384802, -71.218219);
+    private static final LatLng p2 = new LatLng(42.386396, -71.225954);
+    private static final LatLng p3 = new LatLng(42.366146, -71.228616);
+
+    private static final String addr = "175 Forest Street";
+    private static final String addr1 = "1-99 Cedar Hill Ln, Waltham";
+    private static final String addr2 = "16 Forest Street";
+    private static final String addr3 = "196 High St, Waltham";
+
+>>>>>>> Stashed changes
     private static final float zoom = 14.0f;
     public static Context context;
     SQLiteOpenHelper openHelper;
@@ -85,10 +107,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String strl1;//dest
     String strl2;//dest
 
+<<<<<<< Updated upstream
     public MapsActivity() {
         if (m == null) {
             m = new ArrayList<Marker>();
         }
+=======
+    private TabHost tabs;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_map);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+>>>>>>> Stashed changes
     }
     //get location from address
     public LatLng getLocationFromAddress(Context context, String strAddress) {
@@ -152,6 +195,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+<<<<<<< Updated upstream
         mMap.addMarker(new MarkerOptions().position(BENTLEY).title("Bentley University").snippet("175 Forest Street"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BENTLEY, zoom));
 
@@ -161,6 +205,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.addMarker(new MarkerOptions().position(p2));
     }
+=======
+        mMap.addMarker(new MarkerOptions().position(p).title("Bentley University").snippet(addr));
+
+        mMap.addMarker(new MarkerOptions().position(p1).snippet(addr1));
+
+        mMap.addMarker(new MarkerOptions().position(p2).snippet(addr2));
+
+        mMap.addMarker(new MarkerOptions().position(p3).snippet(addr3));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p3, zoom));
+
+
+        mMap.setOnMarkerClickListener(
+                new GoogleMap.OnMarkerClickListener() {
+
+                    public boolean onMarkerClick(Marker m) {
+                        String address = m.getSnippet();
+                        String snip = m.getSnippet();
+                        Toast.makeText(getApplicationContext(), m.getTitle() + "\n" + address, Toast.LENGTH_LONG).show();
+
+                        if ( address.equals(addr) ) {
+                            tabs.setCurrentTabByTag("tag2");
+                        }
+                        if (address.equals(addr1) ) {
+                            tabs.setCurrentTabByTag("tag2");
+                        }
+                        if ( address.equals(addr2) ) {
+                            tabs.setCurrentTabByTag("tag2");
+                        }
+                        if ( address.equals(addr3) ) {
+                            tabs.setCurrentTabByTag("tag2");
+                        }
+                        return true;
+                    }
+                }
+        );
+
+        mMap.setOnMapLongClickListener(
+                new GoogleMap.OnMapLongClickListener() {
+                    public void onMapLongClick(LatLng point) {
+                        Toast.makeText(getApplicationContext(), "Long Tap", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
+
+    public void openSpaceInfo(){
+
+    }
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
     //Add option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -198,6 +299,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+<<<<<<< Updated upstream
     ///get address from LatLng
     private String GetAddress(Double lat, Double lon) {
         Geocoder geocoder = new Geocoder(context, Locale.ENGLISH);
@@ -481,5 +583,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ll = getLocationFromAddress(context, location);
         mMap.addMarker(new MarkerOptions().position(ll).title("Pick Me!").snippet(location));
         Log.d("Spot", location + " added");
+=======
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Maps Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+>>>>>>> Stashed changes
     }
 }

@@ -23,6 +23,20 @@ package="com.example.dannadai.uparking">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+<<<<<<< Updated upstream
+=======
+    <activity android:name=".RegisterActivity"></activity>
+    <activity android:name=".UserArea"></activity>
+    <activity android:name=".MapsActivity"></activity>
+    <activity android:name=".spaceInfo"></activity>
+    <activity android:name=".WebLookup"></activity>
+    <activity android:name=".profile"></activity>
+    <activity android:name=".menu"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+>>>>>>> Stashed changes
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
