@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TabWidget android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,26 +55,15 @@
                         android:onClick="onSearch"
                         android:text="Search"
                         android:textSize="14sp" />
-<<<<<<< Updated upstream
                 </LinearLayout>
-
-                <fragment
-                    android:id="@+id/map1"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="470dp"
-                    tools:context="com.example.dannadai.uparking.myapplication.MapsActivity"/>
-=======
-            </LinearLayout>
->>>>>>> Stashed changes
             </LinearLayout>
 
             <!--  second tab SpaceInfo-->
             <LinearLayout android:id="@+id/SpaceInfo"
                 android:orientation="vertical" android:layout_width="match_parent"
-<<<<<<< Updated upstream
                 android:layout_height="match_parent">
-            <TextView
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address"
@@ -82,14 +74,14 @@
                 android:layout_marginTop="20dp"
                 android:textStyle="normal|bold" />
 
-            <EditText
+               <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPostalAddress" />
 
-            <TextView
+              <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact"
@@ -119,24 +111,20 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="normal|bold" />
 
-
             <EditText
                 android:id="@+id/editText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="phone" />
-=======
-                android:layout_height="match_parent" android:background="#fffff670"
-                android:text="List">
->>>>>>> Stashed changes
 
-            <Button
+                <Button
                 android:id="@+id/showonmap"
                 style="@style/demoStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=" show On map" />
+
             <Button
                 android:id="@+id/dial"
                 android:layout_width="match_parent"
@@ -151,6 +139,7 @@
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Share">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -243,7 +232,6 @@
                         android:fontFamily="sans-serif" />
                 </LinearLayout>
 
-<<<<<<< Updated upstream
                 <Button
                     android:id="@+id/button"
                     android:layout_width="match_parent"
@@ -251,10 +239,7 @@
                     android:text="Save" />
 
             </LinearLayout>
-=======
-            </LinearLayout>
 
->>>>>>> Stashed changes
         </FrameLayout>
     </LinearLayout>
 </TabHost>
