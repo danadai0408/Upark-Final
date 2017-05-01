@@ -98,15 +98,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private static final float zoom = 14.0f;
+    private TabHost tabs;
     private Button button;
     private TabHost.TabSpec spec;
     private TextView tvText;
     private EditText etText;
     private TextToSpeech tts;
     private ListView listview;
-    private ArrayList<String> textArray;
-    public static Context context;
-    private TabHost tabs;
+    private ArrayAdapter adapter;
+    private ArrayList<String> list = new ArrayList<>();
     private GoogleApiClient client;
     private List<Marker> m;
     float d = 10000;
@@ -179,6 +179,64 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }*/
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_map);
+      SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+      mapFragment.getMapAsync(this);
+
+      TabHost tabs = (TabHost) findViewById(R.id.tabhost);
+      tabs.setup();
+      TabHost.TabSpec spec;
+
+      tabs = (TabHost) findViewById(R.id.tabhost);
+      tabs.setup();
+
+      // Initialize a TabSpec for tab1 and add it to the TabHost
+      spec = tabs.newTabSpec("tag1");    //create new tab specification
+      spec.setContent(R.id.tab1);    //add tab view content
+      spec.setIndicator("Map");    //put text on tab
+      tabs.addTab(spec);             //put tab in TabHost container
+
+      button = (Button) findViewById(R.id.searchButton);
+      etText = (EditText) findViewById(R.id.searchET);
+
+  /* Initialize a TabSpec for tab2 and add it to the TabHost */
+      spec = tabs.newTabSpec("tag2");        //create new tab specification
+      spec.setContent(R.id.tab2);            //add view tab content
+      spec.setIndicator("List");              //put text on tab
+      tabs.addTab(spec);                     //put tab in TabHost container
+
+   /* Initialize a TabSpec for tab3 and add it to the TabHost */
+      spec = tabs.newTabSpec("tag3");        //create new tab specification
+      spec.setContent(R.id.tab3);            //add view tab content
+      spec.setIndicator("Share");              //put text on tab
+      tabs.addTab(spec);                     //put tab in TabHost container
+
+
+      //----------------------
+      // Get ListView from XML
+      listview = (ListView) findViewById(R.id.list);
+
+      for (int i = 0; i < addList.length; ++i) {
+          list.add(addList[i]);
+      }
+      ArrayAdapter adapter = new ArrayAdapter(this,
+              android.R.layout.simple_list_item_1, list);
+      listview.setAdapter(adapter);
+
+      listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+          @Override
+          public void onItemClick(AdapterView<?> parent, final View view,
+                                  int position, long id) {
+              String item = (String) parent.getItemAtPosition(position);
+          }
+      });
+
+  }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -227,41 +285,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         );
     }
 
-    //-------------
-
-    public void onItemClick (AdapterView< ? > parent, View view, int position, long id){
-        // ListView Clicked item index
-        int itemPosition = position;
-
-        // ListView Clicked item value
-        String itemValue = (String) listview.getItemAtPosition(position);
-
-    }
-
-    // Implements TextToSpeech.OnInitListener
-    public void onInit(int status){
-        if(status == TextToSpeech.SUCCESS){
-            int result = tts.setLanguage(Locale.US);
-            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e("Error","This Language is not supported");
-            }
-        }
-        else
-            Log.e("Error", "Failed");
-    }
-
-    public void addToSpeech(String str){
+    public void addToSpeech(String str) {
         tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    protected void onPause() {
-        // shut down TextToSpeech
-        if(tts != null){
-            tts.stop();
-            tts.shutdown();
-        }
-        super.onPause();
-    }
   /*  ///get address from LatLng
     private String GetAddress(Double lat, Double lon) {
         Geocoder geocoder = new Geocoder(context, Locale.ENGLISH);
@@ -308,52 +335,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return new Float(dist * meterConversion).floatValue();
     }*/
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
-        TabHost tabs = (TabHost) findViewById(R.id.tabhost);
-        tabs.setup();
-        TabHost.TabSpec spec;
-
-        tabs = (TabHost) findViewById(R.id.tabhost);
-        tabs.setup();
-
-        // Initialize a TabSpec for tab1 and add it to the TabHost
-        spec = tabs.newTabSpec("tag1");    //create new tab specification
-        spec.setContent(R.id.tab1);    //add tab view content
-        spec.setIndicator("Map");    //put text on tab
-        tabs.addTab(spec);             //put tab in TabHost container
-
-        button = (Button) findViewById(R.id.searchButton);
-        etText = (EditText) findViewById(R.id.searchET);
-
-  /* Initialize a TabSpec for tab2 and add it to the TabHost */
-        spec = tabs.newTabSpec("tag2");        //create new tab specification
-        spec.setContent(R.id.tab2);            //add view tab content
-        spec.setIndicator("List");              //put text on tab
-        tabs.addTab(spec);                     //put tab in TabHost container
-
-        // Get ListView from XML
-        listview = (ListView) findViewById(R.id.list);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_map, addList);
-        listview.setAdapter(adapter);
-
-
-
-
-   /* Initialize a TabSpec for tab3 and add it to the TabHost */
-        spec = tabs.newTabSpec("tag3");        //create new tab specification
-        spec.setContent(R.id.tab3);            //add view tab content
-        spec.setIndicator("Share");              //put text on tab
-        tabs.addTab(spec);                     //put tab in TabHost container
-
-
-    }
 
 
 //Insert some base data
