@@ -21,7 +21,7 @@
 
             <!--  first tab Search-->
             <LinearLayout
-                android:id="@+id/SearchHere"
+                android:id="@+id/tab1"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -59,83 +59,20 @@
             </LinearLayout>
 
             <!--  second tab SpaceInfo-->
-            <LinearLayout android:id="@+id/SpaceInfo"
+            <LinearLayout android:id="@+id/tab2"
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="18sp"
-                android:textColor="#13213a"
-                android:fontFamily="sans-serif"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:textStyle="normal|bold" />
+                <ListView android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>
 
-               <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPostalAddress" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact"
-                android:textSize="18sp"
-                android:textColor="#13213a"
-                android:fontFamily="sans-serif"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="normal|bold" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phone Number"
-                android:textSize="18sp"
-                android:textColor="#13213a"
-                android:fontFamily="sans-serif"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="normal|bold" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone" />
-
-                <Button
-                android:id="@+id/showonmap"
-                style="@style/demoStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=" show On map" />
-
-            <Button
-                android:id="@+id/dial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/demoStyle"
-                android:text="Dial" />
             </LinearLayout>
 
             <!-- third tab Share your space-->
             <LinearLayout
-                android:id="@+id/sharespace"
+                android:id="@+id/tab3"
                 android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Share">

@@ -22,6 +22,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 
 import android.net.Uri;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -33,10 +34,13 @@ import android.view.MenuItem;
 
 import android.view.View;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -90,8 +94,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String addr2 = "16 Forest Street";
     private static final String addr3 = "196 High St, Waltham";
 
+    String addList[] = {"1-99 Cedar Hill Ln, Waltham", "16 Forest Street", "196 High St, Waltham"};
+
 
     private static final float zoom = 14.0f;
+    private Button button;
+    private TabHost.TabSpec spec;
+    private TextView tvText;
+    private EditText etText;
+    private TextToSpeech tts;
+    private ListView listview;
+    private ArrayList<String> textArray;
     public static Context context;
     private TabHost tabs;
     private GoogleApiClient client;
@@ -105,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //---------------------------------------
 
-    //restore markers
+ /*   //restore markers
     public MapsActivity() {
         if (m == null) {
             m = new ArrayList<Marker>();
@@ -129,10 +142,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         } catch (Exception ex) {
         }
-        ;
         return null;
     }
-
+*/
 
   /*   //set onclick to search button
     public void onSearch(View view) {
@@ -215,13 +227,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         );
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
+    //-------------
+
+    public void onItemClick (AdapterView< ? > parent, View view, int position, long id){
+        // ListView Clicked item index
+        int itemPosition = position;
+
+        // ListView Clicked item value
+        String itemValue = (String) listview.getItemAtPosition(position);
+
     }
 
-    ///get address from LatLng
+    // Implements TextToSpeech.OnInitListener
+    public void onInit(int status){
+        if(status == TextToSpeech.SUCCESS){
+            int result = tts.setLanguage(Locale.US);
+            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                Log.e("Error","This Language is not supported");
+            }
+        }
+        else
+            Log.e("Error", "Failed");
+    }
+
+    public void addToSpeech(String str){
+        tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    protected void onPause() {
+        // shut down TextToSpeech
+        if(tts != null){
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onPause();
+    }
+  /*  ///get address from LatLng
     private String GetAddress(Double lat, Double lon) {
         Geocoder geocoder = new Geocoder(context, Locale.ENGLISH);
         String ret = "";
@@ -265,7 +306,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int meterConversion = 1609;
 
         return new Float(dist * meterConversion).floatValue();
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,30 +314,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         TabHost tabs = (TabHost) findViewById(R.id.tabhost);
         tabs.setup();
         TabHost.TabSpec spec;
 
-//Insert some base data
-        db = dbhelper2.getWritableDatabase();
+        tabs = (TabHost) findViewById(R.id.tabhost);
+        tabs.setup();
 
-        //Calling InsertData Method - Defined below
-        InsertData("175 Forest St, Waltham, MA 02452", "Henry bentley", "781- 891-2000");
-        InsertData("200 Trapelo Rd, Waltham, MA 02452", "Jane Smith", "617-982-4253");
-        InsertData("20 Middlesex Cir, Waltham, MA 02452", "Mike Jones", "781-894-4230");
-        InsertData("5 Upton Road, Waltham, MA", "Mary Jane", "617-992-4433");
-        //**search tab activity
         // Initialize a TabSpec for tab1 and add it to the TabHost
         spec = tabs.newTabSpec("tag1");    //create new tab specification
-        spec.setContent(R.id.SearchHere);    //add tab view content
-        spec.setIndicator("Search Here");    //put text on tab
+        spec.setContent(R.id.tab1);    //add tab view content
+        spec.setIndicator("Map");    //put text on tab
         tabs.addTab(spec);             //put tab in TabHost container
+
+        button = (Button) findViewById(R.id.searchButton);
+        etText = (EditText) findViewById(R.id.searchET);
+
+  /* Initialize a TabSpec for tab2 and add it to the TabHost */
+        spec = tabs.newTabSpec("tag2");        //create new tab specification
+        spec.setContent(R.id.tab2);            //add view tab content
+        spec.setIndicator("List");              //put text on tab
+        tabs.addTab(spec);                     //put tab in TabHost container
+
+        // Get ListView from XML
+        listview = (ListView) findViewById(R.id.list);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                R.layout.activity_map, addList);
+        listview.setAdapter(adapter);
+
+
+
+
+   /* Initialize a TabSpec for tab3 and add it to the TabHost */
+        spec = tabs.newTabSpec("tag3");        //create new tab specification
+        spec.setContent(R.id.tab3);            //add view tab content
+        spec.setIndicator("Share");              //put text on tab
+        tabs.addTab(spec);                     //put tab in TabHost container
+
+
+    }
+
+
+//Insert some base data
+ //       db = dbhelper2.getWritableDatabase();
+
+        //Calling InsertData Method - Defined below
+     //   InsertData("175 Forest St, Waltham, MA 02452", "Henry bentley", "781- 891-2000");
+   //     InsertData("200 Trapelo Rd, Waltham, MA 02452", "Jane Smith", "617-982-4253");
+   //     InsertData("20 Middlesex Cir, Waltham, MA 02452", "Mike Jones", "781-894-4230");
+    //    InsertData("5 Upton Road, Waltham, MA", "Mary Jane", "617-992-4433");
+        //**search tab activity
+        // Initialize a TabSpec for tab1 and add it to the TabHost
+  //      spec = tabs.newTabSpec("tag1");    //create new tab specification
+  //      spec.setContent(R.id.SearchHere);    //add tab view content
+   //     spec.setIndicator("Search Here");    //put text on tab
+   //     tabs.addTab(spec);
+               //put tab in TabHost container
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         //TODO: show the spot with marker on map
-
+/*
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mMap.setMyLocationEnabled(true);
@@ -374,13 +452,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng minaddress = getLocationFromAddress(context, minAddress);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(minaddress, zoom));
             }
-        });
+        }); */
 
 //**SpaceInfo Tab Activity
         //-------------------------------------------------------------------------------------
 
         // Initialize a TabSpec for tab2 and add it to the TabHost
-        spec = tabs.newTabSpec("tag2");        //create new tab specification
+ /*       spec = tabs.newTabSpec("tag2");        //create new tab specification
         spec.setContent(R.id.SpaceInfo);            //add view tab content
         spec.setIndicator("Space Info");
         tabs.addTab(spec);                    //put tab in TabHost container
@@ -460,9 +538,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final EditText locationDisplay = (EditText) findViewById(R.id.locationDisplay);
         final EditText contactName = (EditText) findViewById(R.id.contactName);
         final EditText phoneDisplay = (EditText) findViewById(R.id.phoneDisplay);
-        Button save = (Button) findViewById(R.id.button);
+        Button save = (Button) findViewById(R.id.button);}
 
-        //Register Button Click Event
+      /*  //Register Button Click Event
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -496,9 +574,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-    }
+    } */
 
-    //Inserting Data into database - Like INSERT INTO QUERY.
+ /*   //Inserting Data into database - Like INSERT INTO QUERY.
     public void InsertData(String location, String contact, String phone) {
 
         ContentValues values = new ContentValues();
@@ -508,13 +586,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ll = getLocationFromAddress(context, location);
         mMap.addMarker(new MarkerOptions().position(ll).title("Pick Me!").snippet(location));
         Log.d("Spot", location + " added");
-    }
+    } */
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    public Action getIndexApiAction() {
+ /*   public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Maps Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
@@ -545,7 +623,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
 
-    }
+    } */
 
 
     //－－－－－－－－－Add option menu
